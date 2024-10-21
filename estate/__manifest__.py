@@ -15,10 +15,10 @@
      
      "data" : [
          #Security data 
-        "security/res_groups.xml"
+        "security/res_groups.xml" ,
         
         #views data 
-        "views/estate_property_views.xml"
+        "views/estate_property_views.xml" ,
         "views/estate_menu.xml" , 
         
      ] , 
