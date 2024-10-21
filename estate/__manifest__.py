@@ -9,6 +9,10 @@
      "demo" : [
        "demo/demo.xml"  
      ],
+     
+     "data" : [
+         "security/res_groups.xml"
+     ] , 
 
     "application": True,
 }
