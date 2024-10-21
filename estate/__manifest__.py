@@ -24,13 +24,6 @@
         
      ] , 
 
-    
-  
-    
     "application": True,
-    "data" :  [ 
-        "views/estate_menu.xml" , 
-        "views/estate_property_views.xml"
-        
-    ]
+  
 }
