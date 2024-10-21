@@ -4,14 +4,18 @@
     "license": "OEEL-1",
     "depends": ["base"],
      
-     #data  
+     """data"""  
      
+     #demo data
      "demo" : [
        "demo/demo.xml"  
      ],
      
+     
      "data" : [
+         #Security data 
          "security/res_groups.xml"
+        
      ] , 
 
     "application": True,
