@@ -24,4 +24,41 @@
         </field>
     </record>
 
+    <!-- Form view  -->
+    <record id="estate_property_form_view" model="ir.ui.view">
+        <field name="name">estate.property.view.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <sheet>
+                
+                <group>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </group>
+                <group>
+                    <group>
+                        <field name="postcode"/>
+                        <field name="date_availability"/>
+                    </group>
+                    <group>
+                        <field name="expected_price"/>
+                        <field name="selling_price"/>
+                    </group>
+                </group>
+            
+                <notebook>
+                    <page name="Description">
+                        <field name="description"/>
+                        <field name="bedRooms"/>
+                        <field name="living_area"/>
+                        <field name="garage"/>
+                        <field name="gardern_orientation"/>
+                    </page>
+                </notebook>
+            </sheet>
+         
+        </field>
+    </record>
+
 </odoo>
