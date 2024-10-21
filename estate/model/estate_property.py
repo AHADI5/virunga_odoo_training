@@ -7,7 +7,7 @@ class Property(models.Model):
     _description = "Property"
     
     def _default_vailability() :
-        0
+        
         """
         this function sets the default vailability date in three month counting from the current date
         """

@@ -20,7 +20,7 @@
                 <field name="active"/>
                 <field name="state"/>
                 <field name="date_availability"/>
-                
+
             </tree>
         </field>
     </record>
@@ -30,35 +30,38 @@
         <field name="name">estate.property.view.form</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <sheet>
-                
-                <group>
-                    <h1>
-                        <field name="name"/>
-                    </h1>
-                </group>
-                <group>
+            <form>
+                <sheet>
                     <group>
-                        <field name="postcode"/>
-                        <field name="date_availability"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
                     </group>
                     <group>
-                        <field name="expected_price"/>
-                        <field name="selling_price"/>
+                        <group>
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                        </group>
+                        <group>
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                        </group>
                     </group>
-                </group>
-            
-                <notebook>
-                    <page name="Description">
-                        <field name="description"/>
-                        <field name="bedRooms"/>
-                        <field name="living_area"/>
-                        <field name="garage"/>
-                        <field name="gardern_orientation"/>
-                    </page>
-                </notebook>
-            </sheet>
-         
+
+                    <notebook>
+                        <page name="Description">
+                            <tree>
+                                <field name="description"/>
+                                <field name="bedRooms"/>
+                                <field name="living_area"/>
+                                <field name="garage"/>
+                                <field name="gardern_orientation"/>
+                            </tree>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+
         </field>
     </record>
 
