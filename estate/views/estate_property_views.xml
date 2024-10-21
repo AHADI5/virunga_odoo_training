@@ -6,5 +6,18 @@
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
     </record>
-    
+
+
+    <!-- List view -->
+
+    <record id="estate_property_tree_view" model="ir.ui.view">
+        <field name="name">model_name.view.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree>
+               
+            </tree>
+        </field>
+    </record>
+
 </odoo>
