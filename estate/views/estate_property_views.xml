@@ -31,7 +31,14 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form>
-                <sheet>
+            <sheet>
+
+                <group>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </group>
+                <group>
                     <group>
                         <h1>
                             <field name="name"/>
@@ -47,6 +54,7 @@
                             <field name="selling_price"/>
                         </group>
                     </group>
+                
 
                     <notebook>
                         <page name="Description">
@@ -59,10 +67,31 @@
                             </tree>
                         </page>
                     </notebook>
+                </group>
                 </sheet>
             </form>
 
         </field>
     </record>
+
+    <!-- Custom Search view -->
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.view.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name  = "name" />
+                <field name  = "living_area" />
+                <group string="Group by">
+                    <filter name = "group_by_ date_availability" context="{group_by:date_availability  }"/>
+                </group>
+                <group string="Filter by">
+                    <filter name = "filter_by_living_area" domain="[('gardern_orientation' , '=' , 'north')]"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
 
 </odoo>
