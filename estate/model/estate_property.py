@@ -91,3 +91,20 @@ class Property(models.Model):
         comodel_name='estate.property.types',
     )
     
+    partner_id  = fields.Many2one(
+        string='Buyer',
+        comodel_name='res.partner',
+        copy=False
+    )
+    
+    sales_person_id =  fields.Many2one(
+        string='Sales Person',
+        comodel_name='res.users',
+        
+        default=lambda self: self.env.user
+        
+        
+    )
+    
+    
+    
