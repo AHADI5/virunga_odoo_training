@@ -10,7 +10,7 @@
     <record id="property_type_action" model="ir.actions.act_window">
         <field name="name">Property types</field>
         <field name="res_model">estate.property.types</field>
-        <field name="view_mode">tree , form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <!-- List view -->
@@ -28,13 +28,12 @@
         </field>
     </record>
 
-    <record id="estate_property_types_view_tree" model="ir.ui.view">
+    <record id="estate_property_types_tree_view" model="ir.ui.view">
         <field name="name">estate.property.types.view.tree</field>
-        <field name="model">model_name</field>
+        <field name="model">estate.property.types</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-
             </tree>
         </field>
     </record>
@@ -74,8 +73,10 @@
                             </group>
                         </page>
                         <page name="Other Info">
-                            <field name="partner_id"/>
-                            <field name="sales_person_id"/>
+                           <group>
+                                <field name="partner_id"/>
+                                <field name="sales_person_id"/>
+                           </group>
                         </page>
                     </notebook>
                 </sheet>
