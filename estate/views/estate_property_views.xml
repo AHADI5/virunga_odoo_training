@@ -29,11 +29,11 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <group>
+               
                         <h1>
                             <field name="name"/>
                         </h1>
-                    </group>
+                   
                     <group>
                         <group>
                             <field name="postcode"/>
