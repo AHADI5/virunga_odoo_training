@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="house1" model="estate.property">
+        <field name="name">Ihusi House</field>
+        <field name="description">A luxurious modern villa with spacious rooms and a beautiful garden.</field>
+        <field name="postcode">12345</field>
+        <field name="date_availability">2024-01-01</field>
+        <field name="expected_price">350000.00</field>
+        <field name="selling_price">340000.00</field>
+        <field name="bedRooms">4</field>
+        <field name="living_area">150</field>
+        <field name="facades">2</field>
+        <field name="garage">True</field>
+        <field name="gardern">True</field>
+        <field name="garden_area">300</field>
+        <field name="gardern_orientation">south</field>
+    </record>
+</odoo>
