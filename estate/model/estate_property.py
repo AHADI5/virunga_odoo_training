@@ -85,3 +85,9 @@ class Property(models.Model):
             ("east", "West"),
         ]
     )
+    
+    property_type_id  = fields.Many2one(
+        string='Type',
+        comodel_name='estate.propery.types',
+    )
+    
