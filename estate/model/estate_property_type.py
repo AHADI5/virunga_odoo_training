@@ -1,8 +1,8 @@
 from odoo import  fields  ,models  # type: ignore
 
 
-class ModelName(models.Model):
-    _name = 'estate.propery.types'
+class EstatePropertyType(models.Model):
+    _name = 'estate.property.types'
     _description = 'Property Type'
 
 

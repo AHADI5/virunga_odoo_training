@@ -88,6 +88,6 @@ class Property(models.Model):
     
     property_type_id  = fields.Many2one(
         string='Type',
-        comodel_name='estate.propery.types',
+        comodel_name='estate.property.types',
     )
     

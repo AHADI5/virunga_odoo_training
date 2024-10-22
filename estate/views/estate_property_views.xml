@@ -9,7 +9,7 @@
 
     <record id="property_type_action" model="ir.actions.act_window">
         <field name="name">Property types</field>
-        <field name="res_model">estate.propery.types</field>
+        <field name="res_model">estate.property.types</field>
         <field name="view_mode">tree , form</field>
     </record>
 
@@ -35,7 +35,6 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-               
                         <h1>
                             <field name="name"/>
                         </h1>
