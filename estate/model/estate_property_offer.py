@@ -15,8 +15,8 @@ class EstatePropertyOffer(models.Model):
         copy=False
     )
     partner_id  = fields.Many2one(
-        string='Partner ' ,
-        comodel_name='estate.property',
+        string='Partner' ,
+        comodel_name='res.partner',
     )
     
     property_id = fields.Many2one(

@@ -101,10 +101,10 @@ class Property(models.Model):
         string='Sales Person',
         comodel_name='res.users',
         
-        default=lambda self: self.env.user
+        default=lambda self: self.env.user ,
     )
     
-    offer_ids  =   fields.One2many(
+    offer_ids =   fields.One2many(
         string='Offers',
         comodel_name='estate.property.offer',
         inverse_name='property_id',
