@@ -37,4 +37,31 @@
             </form>
         </field>
     </record>
+
+    <record id="estate_property_form_view" model="ir.ui.view">
+        <field name="name">estate.property.view.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <sheet>
+
+                <group>
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                </group>
+                <group>
+                    <group>
+                        <field name="property_type_id"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page name="Other Info">
+                        <field name="partner_id"/>
+                        <field name="sales_person_id"/>
+                    </page>
+                </notebook>
+            </sheet>
+
+        </field>
+    </record>
 </odoo>
