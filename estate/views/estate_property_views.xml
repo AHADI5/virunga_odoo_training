@@ -7,9 +7,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-
     <!-- List view -->
-
     <record id="estate_property_tree_view" model="ir.ui.view">
         <field name="name">estate.property.view.tree</field>
         <field name="model">estate.property</field>
@@ -20,25 +18,17 @@
                 <field name="active"/>
                 <field name="state"/>
                 <field name="date_availability"/>
-
             </tree>
         </field>
     </record>
 
-    <!-- Form view  -->
+    <!-- Form view -->
     <record id="estate_property_form_view" model="ir.ui.view">
         <field name="name">estate.property.view.form</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form>
-            <sheet>
-
-                <group>
-                    <h1>
-                        <field name="name"/>
-                    </h1>
-                </group>
-                <group>
+                <sheet>
                     <group>
                         <h1>
                             <field name="name"/>
@@ -54,23 +44,20 @@
                             <field name="selling_price"/>
                         </group>
                     </group>
-                
-
+                    
                     <notebook>
-                        <page name="Description">
-                            <tree>
+                        <page string="Description">
+                            <group>
                                 <field name="description"/>
                                 <field name="bedRooms"/>
                                 <field name="living_area"/>
                                 <field name="garage"/>
                                 <field name="gardern_orientation"/>
-                            </tree>
+                            </group>
                         </page>
                     </notebook>
-                </group>
                 </sheet>
             </form>
-
         </field>
     </record>
 
@@ -80,18 +67,16 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search>
-                <field name  = "name" />
-                <field name  = "living_area" />
+                <field name="name"/>
+                <field name="postcode"/>
                 <group string="Group by">
-                    <filter name = "group_by_ date_availability" context="{group_by:date_availability  }"/>
+                    <filter name="group_by_date_availability" context="{'group_by': 'date_availability'}"/>
                 </group>
                 <group string="Filter by">
-                    <filter name = "filter_by_living_area" domain="[('gardern_orientation' , '=' , 'north')]"/>
+                    <filter name="filter_by_living_area" domain="[('gardern_orientation', '=', 'north')]"/>
                 </group>
             </search>
         </field>
     </record>
-
-
 
 </odoo>
