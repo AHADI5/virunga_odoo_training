@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="estate_partner" model="res.partner">
+        <field name="name">Buyer</field>
+    </record>
+    <record id="estate_sales_person" model="res.users">
+        <field name="name">Sales Person</field>
+    </record>
+</odoo>
