@@ -56,8 +56,10 @@
                 </group>
                 <notebook>
                     <page name="Other Info">
-                        <field name="partner_id"/>
-                        <field name="sales_person_id"/>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="sales_person_id"/>
+                        </group>
                     </page>
                 </notebook>
             </sheet>
