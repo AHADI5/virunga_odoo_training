@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-from odoo import fields, models
+from odoo import fields, models , api
 from dateutil.relativedelta import relativedelta
-=======
-from odoo import fields, models , api  
->>>>>>> computed_fields
+  
 
 
 class Property(models.Model):
