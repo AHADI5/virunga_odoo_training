@@ -60,6 +60,7 @@
                     <group>
                         <field name="property_type_id"/>
                         <field name="tag_ids" widget="many2many_tags"/>
+                        <field name = "best_price"/>
                     </group>
                 </group>
                 <notebook>
