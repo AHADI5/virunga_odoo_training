@@ -48,8 +48,13 @@ class Property(models.Model):
     
     
     
+
+    name = fields.Char(
+        required=True,
+    )
+
     description = fields.Text()
-    
+
     postcode = fields.Char()
 
     date_availability = fields.Date(
@@ -69,16 +74,19 @@ class Property(models.Model):
         default  = 2
     )
     
+
+    bedRooms = fields.Integer()
+
     living_area = fields.Integer()
-    
+
     facades = fields.Integer()
-    
+
     garage = fields.Boolean()
-    
+
     gardern = fields.Boolean()
-    
+
     garden_area = fields.Integer()
-    
+
     gardern_orientation = fields.Selection(
         [
             ("north", "North"),
@@ -86,19 +94,19 @@ class Property(models.Model):
             ("east", "West"),
         ]
     )
-    
-    property_type_id  = fields.Many2one(
+
+    property_type_id = fields.Many2one(
         string='Type',
         comodel_name='estate.property.types',
     )
-    
-    partner_id  = fields.Many2one(
+
+    partner_id = fields.Many2one(
         string='Buyer',
         comodel_name='res.partner',
         copy=False
     )
-    
-    sales_person_id =  fields.Many2one(
+
+    sales_person_id = fields.Many2one(
         string='Sales Person',
         comodel_name='res.users',
         
@@ -106,28 +114,45 @@ class Property(models.Model):
     )
     
     offer_ids =   fields.One2many(
+
+        default=lambda self: self.env.user
+    )
+
+    offer_ids = fields.One2many(
         string='Offers',
         comodel_name='estate.property.offer',
         inverse_name='property_id',
     )
-    
-    tag_ids  = fields.Many2many(
-        string='Tegs',
+
+    tag_ids = fields.Many2many(
+        string='Tags',
         comodel_name='estate.property.tag',
     )
-    
-    #Computed field
-    
-    best_price  =  fields.Float(compute = '_best_price')
-    
-    
+
+    # Computed field
+
+    best_price = fields.Float(compute='_best_price')
+    total_area = fields.Integer(compute='_compute_total_area')
+
     @api.depends('offer_ids.price')
-    def _best_price(self) :  
-        for record in self :
-            record.best_price = max(offer.price for offer in record.offer_ids ) 
-            
-    
-    
-    
-    
-    
+    def _best_price(self):
+        for record in self:
+            if record.offer_ids:
+                record.best_price = max(
+                    offer.price for offer in record.offer_ids)
+            else:
+                record.best_price = 0
+
+    @api.depends('living_area', 'garden_area')
+    def _compute_total_area(self):
+
+        for record in self:
+            # Handling null values
+            if record.living_area and record.garden_area:
+                record.total_area = record.living_area + record.garden_area
+            elif record.living_area and not (record.garden_area):
+                record.total_area = record.living_area
+            elif not (record.living_area) and record.garden_area:
+                record.total_area = record.garden_area
+            else:
+                record.total_area = 0
