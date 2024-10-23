@@ -24,7 +24,6 @@ class EstatePropertyOffer(models.Model):
         comodel_name='estate.property',
         required=True
     )
-<<<<<<< HEAD
     
     property_type_id = fields.Many2one(
         string='Property Type',
@@ -33,5 +32,3 @@ class EstatePropertyOffer(models.Model):
     )
     
     
-=======
->>>>>>> computed_fields
