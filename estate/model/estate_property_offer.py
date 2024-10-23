@@ -16,7 +16,7 @@ class EstatePropertyOffer(models.Model):
     )
     partner_id  = fields.Many2one(
         string='Partner ' ,
-        comodel_name='estate.property',
+        comodel_name='res.partner',
         required=True
     )
     
