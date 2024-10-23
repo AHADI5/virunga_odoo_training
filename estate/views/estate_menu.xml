@@ -11,8 +11,12 @@
         </menuitem>
         <menuitem id = "settings_menu" name = "settings">
             <menuitem
-                id = "settings_menu_action"
+                id = "property_type_menu"
                 action = "property_type_action"
+                />
+            <menuitem
+                id = "property_tag_menu"
+                action = "property_tag_action"
                 />
         </menuitem>
     </menuitem>

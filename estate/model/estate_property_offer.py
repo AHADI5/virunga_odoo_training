@@ -26,6 +26,12 @@ class EstatePropertyOffer(models.Model):
         required=True
     )
     
+    tag_ids  = fields.Many2many(
+        string='Tegs',
+        comodel_name='estate.property.tag',
+    )
+    
+    
     
     
     
