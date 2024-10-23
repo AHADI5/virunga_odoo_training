@@ -6,14 +6,12 @@
         <menuitem id = "property_records" name = "Property">
             <menuitem
                 id = "property_menu"
-                action = "property_action"
-                />
+                action = "property_action" />
         </menuitem>
         <menuitem id = "property_type_records" name = "settings">
             <menuitem
                 id = "property_type_menu"
-                action = "property_type_action"
-                />
+                action = "property_type_action" />
         </menuitem>
     </menuitem>
 
