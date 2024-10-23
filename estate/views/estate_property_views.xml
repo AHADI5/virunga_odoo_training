@@ -13,22 +13,14 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- List view -->
-    <record id="estate_property_tree_view" model="ir.ui.view">
-        <field name="name">estate.property.view.tree</field>
-        <field name="model">estate.property</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="postcode"/>
-                <field name="active"/>
-                <field name="state"/>
-                <field name="date_availability"/>
-            </tree>
-        </field>
+    
+    <record id="property_tag_action" model="ir.actions.act_window">
+        <field name="name">Property Tag</field>
+        <field name="res_model" >estate.property.tag</field>
+        <field name="view_mode">tree</field>
     </record>
 
-    <record id="estate_property_types_tree_view" model="ir.ui.view">
+    <record id="estate_property_types_view_tree" model="ir.ui.view">
         <field name="name">estate.property.types.view.tree</field>
         <field name="model">estate.property.types</field>
         <field name="arch" type="xml">
@@ -49,7 +41,11 @@
                     <h1>
                         <field name="name"/>
                     </h1>
-
+                
+                    <group>
+                        <field name="property_type_id"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                    </group>
                     <group>
                         <group>
                             <field name="property_type_id"/>
@@ -139,4 +135,18 @@
             </search>
         </field>
     </record>
+
+    <record id="estate_property_type_view_form" model="ir.ui.view">
+        <field name="name">estate.property.types.view.form</field>
+        <field name="model">estate.property.types</field>
+        <field name="arch" type="xml">
+            <form >
+                <sheet>
+                    <h1><field name="name"/></h1>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+ 
 </odoo>
