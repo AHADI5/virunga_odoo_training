@@ -19,6 +19,27 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="advertisement_action" model="ir.actions.act_window">
+        <field name="name">Advertisements</field>
+        <field name = "res_model">estate.property.offer</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- Tree view for the offer property  -->
+    <record id="estate_property_offer_tree_view" model="ir.ui.view">
+        <field name="name">estate.property.offer.view.tree</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="property_id"/>
+                <field name="partner_id"/>
+                <field name="price"/>
+                <field name="status"/>
+                <field name="property_type_id"/>
+            </tree>
+        </field>
+    </record>
+
     <!-- Tree View for Property Types -->
     <record id="estate_property_types_view_tree" model="ir.ui.view">
         <field name="name">estate.property.types.view.tree</field>
@@ -132,5 +153,4 @@
             </search>
         </field>
     </record>
-
 </odoo>

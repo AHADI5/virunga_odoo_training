@@ -26,9 +26,10 @@ class EstatePropertyOffer(models.Model):
         required=True
     )
     
+    property_type_id = fields.Char(
+        string='Property Type',
+        related='property_id.propety_type_id'  , 
+        store=True
+    )
     
-    
-    
-    
-
     
