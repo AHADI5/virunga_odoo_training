@@ -15,13 +15,15 @@ class EstatePropertyOffer(models.Model):
         copy=False
     )
     partner_id  = fields.Many2one(
-        string='Partner' ,
-        comodel_name='res.partner',
+        string='Partner ' ,
+        comodel_name='estate.property',
+        required=True
     )
     
     property_id = fields.Many2one(
         string='Property' ,
         comodel_name='estate.property',
+        required=True
     )
     
     
