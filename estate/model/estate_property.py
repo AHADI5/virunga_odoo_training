@@ -75,6 +75,7 @@ class Property(models.Model):
     # Computed field
 
     best_price = fields.Float(compute='_best_price')
+    total_area = fields.Integer(compute='_compute_total_area')
 
     @api.depends('offer_ids.price')
     def _best_price(self):
@@ -84,3 +85,17 @@ class Property(models.Model):
                     offer.price for offer in record.offer_ids)
             else:
                 record.best_price = 0
+
+    @api.depends('living_area', 'garden_area')
+    def _compute_total_area(self):
+
+        for record in self:
+            # Handling null values
+            if record.living_area and record.garden_area:
+                record.total_area = record.living_area + record.garden_area
+            elif record.living_area and not (record.garden_area):
+                record.total_area = record.living_area
+            elif not (record.living_area) and record.garden_area:
+                record.total_area = record.garden_area
+            else:
+                record.total_area = 0
