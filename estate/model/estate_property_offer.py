@@ -17,11 +17,13 @@ class EstatePropertyOffer(models.Model):
     partner_id  = fields.Many2one(
         string='Partner ' ,
         comodel_name='estate.property',
+        required=True
     )
     
     property_id = fields.Many2one(
         string='Property' ,
         comodel_name='estate.property',
+        required=True
     )
     
     

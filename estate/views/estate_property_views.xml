@@ -57,7 +57,14 @@
                 <notebook>
                     <page name="Offers">
                         <group>
-                            <field name="offer_ids"/>
+                            <field name="offer_ids">
+                                <tree>
+                                    <field name="price"/>
+                                    <field name="partner_id"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+
                         </group>
                     </page>
                     <page name="Other Info">
