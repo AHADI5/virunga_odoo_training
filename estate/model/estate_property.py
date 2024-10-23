@@ -67,6 +67,11 @@ class Property(models.Model):
         inverse_name='property_id',
     )
     
+    tag_ids  = fields.Many2many(
+        string='Tegs',
+        comodel_name='estate.property.tag',
+    )
+    
     
     
     
