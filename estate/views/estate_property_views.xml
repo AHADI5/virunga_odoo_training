@@ -8,18 +8,18 @@
     </record>
 
     <record id="property_type_action" model="ir.actions.act_window">
-        <field name="name">Property types</field>
+        <field name="name">Property Types</field>
         <field name="res_model">estate.property.types</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    
     <record id="property_tag_action" model="ir.actions.act_window">
         <field name="name">Property Tag</field>
-        <field name="res_model" >estate.property.tag</field>
+        <field name="res_model">estate.property.tag</field>
         <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Tree View for Property Types -->
     <record id="estate_property_types_view_tree" model="ir.ui.view">
         <field name="name">estate.property.types.view.tree</field>
         <field name="model">estate.property.types</field>
@@ -30,18 +30,16 @@
         </field>
     </record>
 
-    <!-- Form view -->
+    <!-- Form View for Properties -->
     <record id="estate_property_form_view" model="ir.ui.view">
         <field name="name">estate.property.view.form</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
-
                     <h1>
                         <field name="name"/>
                     </h1>
-                
                     <group>
                         <field name="property_type_id"/>
                         <field name="tag_ids" widget="many2many_tags"/>
@@ -55,11 +53,10 @@
                         <group>
                             <field name="expected_price"/>
                             <field name="selling_price"/>
+                            <field name="best_price"/>
                         </group>
                     </group>
-
                     <notebook>
-
                         <page string="Description">
                             <group>
                                 <field name="description"/>
@@ -69,7 +66,7 @@
                                 <field name="gardern_orientation"/>
                             </group>
                         </page>
-                        <page name="Offers">
+                        <page string="Offers">
                             <group>
                                 <field name="offer_ids">
                                     <tree>
@@ -80,7 +77,7 @@
                                 </field>
                             </group>
                         </page>
-                        <page name="Other Info">
+                        <page string="Other Info">
                             <group>
                                 <field name="partner_id"/>
                                 <field name="sales_person_id"/>
@@ -92,11 +89,12 @@
         </field>
     </record>
 
+    <!-- Form View for Property Types -->
     <record id="estate_property_type_view_form" model="ir.ui.view">
         <field name="name">estate.property.types.view.form</field>
         <field name="model">estate.property.types</field>
         <field name="arch" type="xml">
-            <form >
+            <form>
                 <sheet>
                     <h1>
                         <field name="name"/>
@@ -106,9 +104,7 @@
         </field>
     </record>
 
-
-
-    <!-- Custom Search view -->
+    <!-- Custom Search View for Property -->
     <record id="estate_property_view_search" model="ir.ui.view">
         <field name="name">estate.property.view.search</field>
         <field name="model">estate.property</field>
@@ -126,68 +122,15 @@
         </field>
     </record>
 
+    <!-- Custom Search View for Property Types -->
     <record id="estate_property_type_view_search" model="ir.ui.view">
         <field name="name">estate.property.types.view.search</field>
         <field name="model">estate.property.types</field>
         <field name="arch" type="xml">
-            <search >
+            <search>
                 <field name="name"/>
             </search>
         </field>
     </record>
 
-    <record id="estate_property_type_view_form" model="ir.ui.view">
-        <field name="name">estate.property.types.view.form</field>
-        <field name="model">estate.property.types</field>
-        <field name="arch" type="xml">
-            <form >
-                <sheet>
-                    <h1><field name="name"/></h1>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="estate_property_form_view" model="ir.ui.view">
-        <field name="name">estate.property.view.form</field>
-        <field name="model">estate.property</field>
-        <field name="arch" type="xml">
-            <sheet>
-
-                <group>
-                    <h1>
-                        <field name="name" />
-                    </h1>
-                </group>
-                <group>
-                    <group>
-                        <field name="property_type_id"/>
-                        <field name="tag_ids" widget="many2many_tags"/>
-                        <field name = "best_price"/>
-                    </group>
-                </group>
-                <notebook>
-                    <page name="Offers">
-                        <group>
-                            <field name="offer_ids">
-                                <tree>
-                                    <field name="price"/>
-                                    <field name="partner_id"/>
-                                    <field name="status"/>
-                                </tree>
-                            </field>
-
-                        </group>
-                    </page>
-                    <page name="Other Info">
-                        <group>
-                            <field name="partner_id"/>
-                            <field name="sales_person_id"/>
-                        </group>
-                    </page>
-                </notebook>
-            </sheet>
-
-        </field>
-    </record>
 </odoo>
