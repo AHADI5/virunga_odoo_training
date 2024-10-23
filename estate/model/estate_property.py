@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models , api  
 
 
 class Property(models.Model):
@@ -71,6 +71,18 @@ class Property(models.Model):
         string='Tegs',
         comodel_name='estate.property.tag',
     )
+    
+    #Computed field
+    
+    best_price  =  fields.Float(compute = '_best_price')
+    
+    
+    @api.depends('offer_ids.price')
+    def _best_price(self) :  
+        for record in self :
+            record.best_price = max(offer.price for offer in record.offer_ids ) 
+            
+    
     
     
     
