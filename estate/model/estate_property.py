@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 from odoo import fields, models
 from dateutil.relativedelta import relativedelta
+=======
+from odoo import fields, models , api  
+>>>>>>> computed_fields
 
 
 class Property(models.Model):
@@ -111,9 +115,20 @@ class Property(models.Model):
     )
     
     tag_ids  = fields.Many2many(
-        string='Tags',
+        string='Tegs',
         comodel_name='estate.property.tag',
     )
+    
+    #Computed field
+    
+    best_price  =  fields.Float(compute = '_best_price')
+    
+    
+    @api.depends('offer_ids.price')
+    def _best_price(self) :  
+        for record in self :
+            record.best_price = max(offer.price for offer in record.offer_ids ) 
+            
     
     
     
