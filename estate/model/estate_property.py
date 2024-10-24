@@ -156,3 +156,4 @@ class Property(models.Model):
                 record.total_area = record.garden_area
             else:
                 record.total_area = 0
+    
