@@ -156,4 +156,26 @@ class Property(models.Model):
                 record.total_area = record.garden_area
             else:
                 record.total_area = 0
+    @api.onchange('gardern')
+    def _onchange_garden(self):
+        for record in self  :
+            if record.garden  : 
+                record.garden_area = 10  
+                record.orientation  = 'north'
+            else :
+                record.garden_area = 0  
+                record.orientation  = ''  
+    
+    @api.onchange('date_availability')
+    def _onchange_date_availability(self):
+        for record in self   : 
+            if record.date_field.date_availability < fields.Date.today() :  
+                return {
+                    "warning" :  {
+                        "title" : 'Value error' ,
+                        "message": 'The date should not be prior to the current Dat'
+                    }
+                }
+                
+                
     
