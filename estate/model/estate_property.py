@@ -102,21 +102,21 @@ class Property(models.Model):
     @api.onchange('gardern')
     def _onchange_garden(self):
         for record in self  :
-            if record.garden  : 
+            if record.gardern  : 
                 record.garden_area = 10  
-                record.orientation  = 'north'
+                record.gardern_orientation  = 'north'
             else :
                 record.garden_area = 0  
-                record.orientation  = ''  
+                record.gardern_orientation  = ''  
     
     @api.onchange('date_availability')
     def _onchange_date_availability(self):
         for record in self   : 
-            if record.date_field.date_availability < fields.Date.today() :  
+            if record.date_availability < fields.Date.today() :  
                 return {
                     "warning" :  {
                         "title" : 'Value error' ,
-                        "message": 'The date should not be prior to the current Dat'
+                        "message": 'The date should not be prior to the current Date'
                     }
                 }
                 

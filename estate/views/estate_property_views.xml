@@ -68,6 +68,12 @@
                     </group>
                 </group>
                 <notebook>
+                    <page name="Description">
+                        <group>
+                            <field name="gardern_orientation"/>
+                            <field name="gardern_area"/>
+                        </group>
+                    </page>
                     <page name="Offers">
                         <group>
                             <field name="offer_ids">
