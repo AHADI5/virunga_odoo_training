@@ -27,18 +27,17 @@ class EstatePropertyOffer(models.Model):
     )
 
     validity = fields.Integer(default=7)
-    ceate_date = fields.Date(default=fields.Date.context_today)
+    ceate_date = fields.Date(default=fields.Date.today)
     date_deadline = fields.Date(
         compute='_compute_deadline',
         inverse='_inverse_deadline'
     )
 
     @api.depends('validity', 'create_date')
-    def _compute_field(self):
+    def _compute_deadline(self):
         for record in self:
-            record.date_deadline = record.create_date + \
-                timedelta(days=record.validity)
+            record.date_deadline = record.create_date + timedelta(days=record.validity)
 
     def _inverse_deadline(self):
         for record in self:
-            record.validity = (record.deadline - record.create_date).days
+            record.validity = (record.date_deadline - record.create_date).days
