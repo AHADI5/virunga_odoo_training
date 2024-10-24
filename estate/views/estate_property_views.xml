@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="property_type_action" model="ir.actions.act_window">
+        <field name="name">Property types</field>
+        <field name="res_model">estate.property.types</field>
+        <field name="view_mode">tree , form</field>
+    </record>
+
+
+    <record id="property_tag_action" model="ir.actions.act_window">
+        <field name="name">Property Tag</field>
+        <field name="res_model">estate.property.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="estate_property_types_view_tree" model="ir.ui.view">
+        <field name="name">estate.property.types.view.tree</field>
+        <field name="model">estate.property.types</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="estate_property_type_view_search" model="ir.ui.view">
+        <field name="name">estate.property.types.view.search</field>
+        <field name="model">estate.property.types</field>
+        <field name="arch" type="xml">
+            <search >
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="estate_property_type_view_form" model="ir.ui.view">
+        <field name="name">estate.property.types.view.form</field>
+        <field name="model">estate.property.types</field>
+        <field name="arch" type="xml">
+            <form >
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="estate_property_form_view" model="ir.ui.view">
+        <field name="name">estate.property.view.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <sheet>
+
+                <group>
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                </group>
+                <group>
+                    <group>
+                        <field name="property_type_id"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name = "best_price"/>
+                        <field name = "total_area" />
+                       
+                    </group>
+                </group>
+                <notebook>
+                    <page name="Description">
+                        <group>
+                            <field name="gardern_orientation"/>
+                            <field name="gardern_area"/>
+                        </group>
+                    </page>
+                    <page name="Offers">
+                        <group>
+                            <field name="offer_ids">
+                                <tree>
+                                    <field name="price"/>
+                                    <field name="partner_id"/>
+                                    <field name="status"/>
+                                    <field name = "validity" />
+                                    <field name = "date_deadline" />
+                                </tree>
+                            </field>
+
+                        </group>
+                    </page>
+                    <page name="Other Info">
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="sales_person_id"/>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+
+        </field>
+    </record>
+</odoo>
