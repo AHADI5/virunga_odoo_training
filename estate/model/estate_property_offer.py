@@ -25,6 +25,14 @@ class EstatePropertyOffer(models.Model):
         comodel_name='estate.property',
         required=True
     )
+    
+    property_type_id = fields.Many2one(
+        string='Property Type',
+        related='property_id.property_type_id', 
+        store=True
+    )
+    
+    
 
     validity = fields.Integer(default=7)
     ceate_date = fields.Date(default=fields.Date.context_today)
