@@ -108,8 +108,9 @@
                                 <field name="description"/>
                                 <field name="bedRooms"/>
                                 <field name="living_area"/>
+                                <field name="garden_area"/>
                                 <field name="garage"/>
-                                <field name="garden"/>
+                                <field name="gardern"/>
                                 <field name="gardern_orientation"/>
                             </group>
                         </page>
