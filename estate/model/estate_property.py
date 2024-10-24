@@ -169,7 +169,7 @@ class Property(models.Model):
     @api.onchange('date_availability')
     def _onchange_date_availability(self):
         for record in self   : 
-            if record.date_field.date_availability < fields.Date.today() :  
+            if record.date_availability < fields.Date.today() :  
                 return {
                     "warning" :  {
                         "title" : 'Value error' ,
