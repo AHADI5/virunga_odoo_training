@@ -82,11 +82,15 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <header>
+                        <button  type="object" string="Sold" name = "sell_property"/>
+                        <button  type="object" string="Cancel" name ="cancel_sold_property"/>
+                    </header>
                     <h1>
                         <field name="name"/>
                     </h1>
                     <group>
-                        <field name="property_type_id"/>
+                        <field name="state"/>
                         <field name="tag_ids" widget="many2many_tags"/>
                         <field name = "total_area"/>
                     </group>

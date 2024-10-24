@@ -1,53 +1,49 @@
-from odoo import fields, models , api
+from odoo import fields, models, api
 from dateutil.relativedelta import relativedelta
-  
+from odoo.exceptions import UserError
 
 
 class Property(models.Model):
     _name = "estate.property"
     _description = "Property"
-    
-    def _default_vailability() :
-        
+
+    def _default_vailability():
+
         """
-        this function sets the default vailability date in three month counting from the current date
+        this function sets the default availability date in three month counting from the current date
         """
-         
-        #Get today's date
-        today = fields.Date.today() 
-        
-        #Add three months to the current date  
-        avail_date  = today + relativedelta(months = 3)
-         
+
+        # Get today's date
+        today = fields.Date.today()
+
+        # Add three months to the current date
+        avail_date = today + relativedelta(months=3)
+
         return avail_date
-    
-    
+
     name = fields.Char(
         required=True,
     )
-    
-    active  =  fields.Boolean(
-        default= True
-        
+
+    active = fields.Boolean(
+        default=True
+
     )
-    
-    state  =  fields.Selection(
+
+    state = fields.Selection(
 
         [
             ('new', 'New'),
-            ('offer_received', 'Offer Received') , 
-            ('offer_accepted', 'Offer Accepted') , 
-            ('sold' , 'Sold') , 
-            ('canceled' , 'Canceled')
-            
-        ] , 
-        required=True  , 
-        copy=False  , 
-        default  = 'new'
+            ('offer_received', 'Offer Received'),
+            ('offer_accepted', 'Offer Accepted'),
+            ('sold', 'Sold'),
+            ('canceled', 'Canceled')
+
+        ],
+        required=True,
+        copy=False,
+        default='new'
     )
-    
-    
-    
 
     name = fields.Char(
         required=True,
@@ -58,22 +54,21 @@ class Property(models.Model):
     postcode = fields.Char()
 
     date_availability = fields.Date(
-        copy = False , 
-        default  = _default_vailability()
+        copy=False,
+        default=_default_vailability()
     )
 
     expected_price = fields.Float()
 
     selling_price = fields.Float(
-        readonly=True , 
-        copy= False
-        
+        readonly=True,
+        copy=False
+
     )
-    
+
     bedRooms = fields.Integer(
-        default  = 2
+        default=2
     )
-    
 
     bedRooms = fields.Integer()
 
@@ -109,11 +104,11 @@ class Property(models.Model):
     sales_person_id = fields.Many2one(
         string='Sales Person',
         comodel_name='res.users',
-        
-        default=lambda self: self.env.user ,
+
+        default=lambda self: self.env.user,
     )
-    
-    offer_ids =   fields.One2many(
+
+    offer_ids = fields.One2many(
 
         default=lambda self: self.env.user
     )
@@ -156,26 +151,47 @@ class Property(models.Model):
                 record.total_area = record.garden_area
             else:
                 record.total_area = 0
+
     @api.onchange('gardern')
     def _onchange_garden(self):
-        for record in self  :
-            if record.gardern  : 
-                record.garden_area = 10  
-                record.gardern_orientation  = 'north'
-            else :
-                record.garden_area = 0  
-                record.gardern_orientation  = ''  
-    
+        for record in self:
+            if record.gardern:
+                record.garden_area = 10
+                record.gardern_orientation = 'north'
+            else:
+                record.garden_area = 0
+                record.gardern_orientation = ''
+
     @api.onchange('date_availability')
     def _onchange_date_availability(self):
-        for record in self   : 
-            if record.date_availability < fields.Date.today() :  
+        for record in self:
+            if record.date_availability < fields.Date.today():
                 return {
-                    "warning" :  {
-                        "title" : 'Value error' ,
+                    "warning": {
+                        "title": 'Value error',
                         "message": 'The date should not be prior to the current Dat'
                     }
                 }
-                
-                
-    
+
+    #actions method
+    def sell_property(self):
+
+        """this method sets a property state to sold , if it's not cancelled"""
+
+        for record in self:
+            if record.state  ==  'canceled':
+                raise UserError("A canceled property cannot be sell.")
+            else :
+                record.state = 'sold'
+
+
+    def cancel_sold_property(self):
+
+        """this method sets a property state to cancel , if it's not sold"""
+
+        for record in self:
+            if record.state == 'sold':
+                raise UserError("A sold property cannot be canceled.")
+            else :
+                record.state = 'canceled'
+
