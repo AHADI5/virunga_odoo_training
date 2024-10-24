@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <menuitem id="principal_menu" name="Estate">
+        <menuitem id="property_records" name="Property">
+            <menuitem
+                id="property_menu_action"
+                action="property_action"
+            />
+        </menuitem>
+        <menuitem id="settings_menu" name="settings">
+            <menuitem
+                id="property_type_menu"
+                action="property_type_action"
+            />
+            <menuitem
+                id="property_tag_menu"
+                action="property_tag_action"
+            />
+        </menuitem>
+        <menuitem id = "advertisement_menuitem" name = "Advertisement">
+            <menuitem
+                id = "advertisement_menu"
+                action = "advertisement_action"
+                />
+        </menuitem>
+    </menuitem>
+</odoo>
