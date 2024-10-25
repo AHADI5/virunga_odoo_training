@@ -138,8 +138,7 @@ class Property(models.Model):
     def _best_price(self):
         for record in self:
             if record.offer_ids:
-                record.best_price = max(
-                    offer.price for offer in record.offer_ids)
+                record.best_price = max(record.offer_ids.mapped("price"))
             else:
                 record.best_price = 0
 
