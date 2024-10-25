@@ -108,10 +108,7 @@ class Property(models.Model):
         default=lambda self: self.env.user,
     )
 
-    offer_ids = fields.One2many(
 
-        default=lambda self: self.env.user
-    )
 
     offer_ids = fields.One2many(
         string='Offers',

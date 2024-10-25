@@ -1,5 +1,9 @@
+import logging
+
 from odoo import fields, models, api
 from datetime import datetime, timedelta
+from odoo.exceptions import UserError
+from pyparsing import empty
 
 
 class EstatePropertyOffer(models.Model):
@@ -47,3 +51,19 @@ class EstatePropertyOffer(models.Model):
     def _inverse_deadline(self):
         for record in self:
             record.validity = (record.date_deadline - record.create_date).days
+
+    #Actions
+
+    def accept_offer(self):
+
+        # checking whether there is an offer accepted for a particular property
+        isOrderAccepted = [ offer for offer in self.property_id.offer_ids if offer.status == 'accepted']
+        if len(isOrderAccepted) == 0:
+            self.status = 'accepted'
+        else :
+            raise UserError("Only One Offer can be accepted for this property")
+
+    def refuse_offer(self):
+        self.status = 'refused'
+
+
