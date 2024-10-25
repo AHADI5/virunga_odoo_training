@@ -35,7 +35,6 @@ class EstatePropertyOffer(models.Model):
     
 
     validity = fields.Integer(default=7)
-    create_date = fields.Date(default=fields.Date.today)
     date_deadline = fields.Date(
         compute='_compute_deadline',
         inverse='_inverse_deadline'
