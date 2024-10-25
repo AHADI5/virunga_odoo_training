@@ -2,7 +2,6 @@ from odoo import fields, models, api
 from dateutil.relativedelta import relativedelta
 from odoo.exceptions import UserError
 
-
 class Property(models.Model):
     _name = "estate.property"
     _description = "Property"
@@ -104,9 +103,10 @@ class Property(models.Model):
     sales_person_id = fields.Many2one(
         string='Sales Person',
         comodel_name='res.users',
-
         default=lambda self: self.env.user,
     )
+
+
 
 
 
@@ -130,8 +130,7 @@ class Property(models.Model):
     def _best_price(self):
         for record in self:
             if record.offer_ids:
-                record.best_price = max(
-                    offer.price for offer in record.offer_ids)
+                record.best_price = max(record.offer_ids.mapped("price"))
             else:
                 record.best_price = 0
 
@@ -140,24 +139,16 @@ class Property(models.Model):
 
         for record in self:
             # Handling null values
-            if record.living_area and record.garden_area:
-                record.total_area = record.living_area + record.garden_area
-            elif record.living_area and not (record.garden_area):
-                record.total_area = record.living_area
-            elif not (record.living_area) and record.garden_area:
-                record.total_area = record.garden_area
-            else:
-                record.total_area = 0
+            record.total_area = record.living_area + record.garden_area
 
     @api.onchange('gardern')
     def _onchange_garden(self):
-        for record in self:
-            if record.gardern:
-                record.garden_area = 10
-                record.gardern_orientation = 'north'
+            if self.gardern:
+                self.garden_area = 10
+                self.gardern_orientation = 'north'
             else:
-                record.garden_area = 0
-                record.gardern_orientation = ''
+                self.garden_area = 0
+                self.gardern_orientation = ''
 
     @api.onchange('date_availability')
     def _onchange_date_availability(self):
@@ -188,3 +179,25 @@ class Property(models.Model):
             raise UserError("A sold property cannot be canceled.")
         else:
             self.state = 'canceled'
+ 
+
+    @api.onchange('gardern')
+    def _onchange_garden(self):
+
+        if self.gardern:
+            self.garden_area = 10
+            self.gardern_orientation = 'north'
+        else:
+            self.garden_area = 0
+            self.gardern_orientation = ''
+
+    @api.onchange('date_availability')
+    def _onchange_date_availability(self):
+        if self.date_availability < fields.Date.today():
+            return {
+                "warning": {
+                    "title": 'Value error',
+                    "message": 'The date should not be prior to the current Dat'
+                }
+            }
+
