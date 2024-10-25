@@ -153,14 +153,12 @@ class Property(models.Model):
             record.garden_area = 0
             record.gardern_orientation = ''
 
-
     @api.onchange('date_availability')
     def _onchange_date_availability(self):
-        for record in self:
-            if record.date_availability < fields.Date.today():
-                return {
-                    "warning": {
-                        "title": 'Value error',
-                        "message": 'The date should not be prior to the current Dat'
-                    }
+        if record.date_availability < fields.Date.today():
+            return {
+                "warning": {
+                    "title": 'Value error',
+                    "message": 'The date should not be prior to the current Dat'
                 }
+            }
