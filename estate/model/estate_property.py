@@ -173,25 +173,21 @@ class Property(models.Model):
                     }
                 }
 
-    #actions method
+    # actions method
     def sell_property(self):
 
         """this method sets a property state to sold , if it's not cancelled"""
 
-        for record in self:
-            if record.state  ==  'canceled':
-                raise UserError("A canceled property cannot be sell.")
-            else :
-                record.state = 'sold'
-
+        if self.state == 'canceled':
+            raise UserError("A canceled property cannot be sell.")
+        else:
+            self.state = 'sold'
 
     def cancel_sold_property(self):
 
         """this method sets a property state to cancel , if it's not sold"""
 
-        for record in self:
-            if record.state == 'sold':
-                raise UserError("A sold property cannot be canceled.")
-            else :
-                record.state = 'canceled'
-
+        if self.state == 'sold':
+            raise UserError("A sold property cannot be canceled.")
+        else:
+            self.state = 'canceled'
