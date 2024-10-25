@@ -146,16 +146,16 @@ class Property(models.Model):
     @api.onchange('gardern')
     def _onchange_garden(self):
 
-        if record.gardern:
-            record.garden_area = 10
-            record.gardern_orientation = 'north'
+        if self.gardern:
+            self.garden_area = 10
+            self.gardern_orientation = 'north'
         else:
-            record.garden_area = 0
-            record.gardern_orientation = ''
+            self.garden_area = 0
+            self.gardern_orientation = ''
 
     @api.onchange('date_availability')
     def _onchange_date_availability(self):
-        if record.date_availability < fields.Date.today():
+        if self.date_availability < fields.Date.today():
             return {
                 "warning": {
                     "title": 'Value error',
