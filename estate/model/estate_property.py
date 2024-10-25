@@ -1,6 +1,6 @@
 from odoo import fields, models, api
 from dateutil.relativedelta import relativedelta
-
+from odoo.exceptions import UserError
 
 class Property(models.Model):
     _name = "estate.property"
@@ -9,7 +9,7 @@ class Property(models.Model):
     def _default_vailability():
 
         """
-        this function sets the default vailability date in three month counting from the current date
+        this function sets the default availability date in three month counting from the current date
         """
 
         # Get today's date
@@ -103,14 +103,12 @@ class Property(models.Model):
     sales_person_id = fields.Many2one(
         string='Sales Person',
         comodel_name='res.users',
-
         default=lambda self: self.env.user,
     )
 
-    offer_ids = fields.One2many(
 
-        default=lambda self: self.env.user
-    )
+
+
 
     offer_ids = fields.One2many(
         string='Offers',
@@ -145,6 +143,46 @@ class Property(models.Model):
 
     @api.onchange('gardern')
     def _onchange_garden(self):
+            if self.gardern:
+                self.garden_area = 10
+                self.gardern_orientation = 'north'
+            else:
+                self.garden_area = 0
+                self.gardern_orientation = ''
+
+    @api.onchange('date_availability')
+    def _onchange_date_availability(self):
+        for record in self:
+            if record.date_availability < fields.Date.today():
+                return {
+                    "warning": {
+                        "title": 'Value error',
+                        "message": 'The date should not be prior to the current Dat'
+                    }
+                }
+
+    # actions method
+    def sell_property(self):
+
+        """this method sets a property state to sold , if it's not cancelled"""
+
+        if self.state == 'canceled':
+            raise UserError("A canceled property cannot be sell.")
+        else:
+            self.state = 'sold'
+
+    def cancel_sold_property(self):
+
+        """this method sets a property state to cancel , if it's not sold"""
+
+        if self.state == 'sold':
+            raise UserError("A sold property cannot be canceled.")
+        else:
+            self.state = 'canceled'
+ 
+
+    @api.onchange('gardern')
+    def _onchange_garden(self):
 
         if self.gardern:
             self.garden_area = 10
@@ -162,3 +200,4 @@ class Property(models.Model):
                     "message": 'The date should not be prior to the current Dat'
                 }
             }
+
