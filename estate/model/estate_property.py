@@ -147,14 +147,7 @@ class Property(models.Model):
 
         for record in self:
             # Handling null values
-            if record.living_area and record.garden_area:
-                record.total_area = record.living_area + record.garden_area
-            elif record.living_area and not (record.garden_area):
-                record.total_area = record.living_area
-            elif not (record.living_area) and record.garden_area:
-                record.total_area = record.garden_area
-            else:
-                record.total_area = 0
+            record.total_area = record.living_area + record.garden_area
     @api.onchange('gardern')
     def _onchange_garden(self):
         for record in self  :
