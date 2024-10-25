@@ -1,9 +1,9 @@
 import logging
 
 from odoo import fields, models, api
-from datetime import datetime, timedelta
+from datetime import timedelta
 from odoo.exceptions import UserError
-from pyparsing import empty
+
 
 
 class EstatePropertyOffer(models.Model):
@@ -45,24 +45,25 @@ class EstatePropertyOffer(models.Model):
     @api.depends('validity', 'create_date')
     def _compute_deadline(self):
         for record in self:
-            record.date_deadline = record.create_date + timedelta(days=record.validity)
+            if record.create_date:
+                record.date_deadline = record.create_date.date() + timedelta(days=record.validity)
+            else  :
+                record.date_deadline = fields.Date.today() + timedelta(days=record.validity)
 
     def _inverse_deadline(self):
         for record in self:
-            record.validity = (record.date_deadline - record.create_date).days
+            record.validity = (record.date_deadline - record.create_date.date()).days
 
-    #Actions
+    # Actions
 
     def accept_offer(self):
 
         # checking whether there is an offer accepted for a particular property
-        isOrderAccepted = [ offer for offer in self.property_id.offer_ids if offer.status == 'accepted']
+        isOrderAccepted = [offer for offer in self.property_id.offer_ids if offer.status == 'accepted']
         if len(isOrderAccepted) == 0:
             self.status = 'accepted'
-        else :
+        else:
             raise UserError("Only One Offer can be accepted for this property")
 
     def refuse_offer(self):
         self.status = 'refused'
-
-
