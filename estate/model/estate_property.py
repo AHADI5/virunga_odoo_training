@@ -153,6 +153,7 @@ class Property(models.Model):
             record.garden_area = 0
             record.gardern_orientation = ''
 
+
     @api.onchange('date_availability')
     def _onchange_date_availability(self):
         for record in self:
