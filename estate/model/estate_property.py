@@ -6,6 +6,14 @@ class Property(models.Model):
     _name = "estate.property"
     _description = "Property"
 
+    #Sql constraints
+
+    _sql_constraints = [
+        ("positive_expected_price", "CHECK(expected_price > 0)", "The Expected price must be strictly  positive"),
+        ("property_unique_name" , "UNIQUE(name)", "The property name must be unique")
+
+    ]
+
     def _default_vailability():
 
         """
@@ -44,10 +52,6 @@ class Property(models.Model):
         default='new'
     )
 
-    name = fields.Char(
-        required=True,
-    )
-
     description = fields.Text()
 
     postcode = fields.Char()
@@ -62,14 +66,12 @@ class Property(models.Model):
     selling_price = fields.Float(
         readonly=True,
         copy=False
-
     )
 
-    bedRooms = fields.Integer(
+    bed_rooms = fields.Integer(
         default=2
     )
 
-    bedRooms = fields.Integer()
 
     living_area = fields.Integer()
 
@@ -105,10 +107,6 @@ class Property(models.Model):
         comodel_name='res.users',
         default=lambda self: self.env.user,
     )
-
-
-
-
 
     offer_ids = fields.One2many(
         string='Offers',

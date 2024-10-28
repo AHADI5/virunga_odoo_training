@@ -7,7 +7,7 @@
         <field name="date_availability">2024-01-01</field>
         <field name="expected_price">350000.00</field>
         <field name="selling_price">340000.00</field>
-        <field name="bedRooms">4</field>
+        <field name="bed_rooms">4</field>
         <field name="living_area">150</field>
         <field name="facades">2</field>
         <field name="garage">True</field>
