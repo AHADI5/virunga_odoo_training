@@ -63,13 +63,15 @@ class EstatePropertyOffer(models.Model):
     # Actions
 
     def accept_offer(self):
-
         # checking whether there is an offer accepted for a particular property
         isOrderAccepted = [offer for offer in self.property_id.offer_ids if offer.status == 'accepted']
         if len(isOrderAccepted) == 0:
             self.status = 'accepted'
+            self.property_id.selling_price  = self.price
+            self.property_id.partner_id= self.partner_id
         else:
             raise UserError("Only One Offer can be accepted for this property")
 
     def refuse_offer(self):
         self.status = 'refused'
+        self.property_id.selling_price = 0
