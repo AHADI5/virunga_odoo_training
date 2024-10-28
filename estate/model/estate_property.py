@@ -10,6 +10,7 @@ class Property(models.Model):
 
     _sql_constraints = [
         ("positive_expected_price", "CHECK(expected_price > 0)", "The Expected price must be strictly  positive"),
+        ("positive_selling_price", "CHECK(selling_price >= 0)", "The Expected price must be strictly  positive"),
         ("property_unique_name" , "UNIQUE(name)", "The property name must be unique")
 
     ]
