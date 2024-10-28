@@ -1,10 +1,21 @@
+from email.policy import default
+
 from odoo import fields, models, api
 from dateutil.relativedelta import relativedelta
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError ,  ValidationError
 
 class Property(models.Model):
     _name = "estate.property"
     _description = "Property"
+
+    #Sql constraints
+
+    _sql_constraints = [
+        ("positive_expected_price", "CHECK(expected_price > 0)", "The Expected price must be strictly  positive"),
+        ("positive_selling_price", "CHECK(selling_price >= 0)", "The Expected price must be strictly  positive"),
+        ("property_unique_name" , "UNIQUE(name)", "The property name must be unique")
+
+    ]
 
     def _default_vailability():
 
@@ -44,10 +55,6 @@ class Property(models.Model):
         default='new'
     )
 
-    name = fields.Char(
-        required=True,
-    )
-
     description = fields.Text()
 
     postcode = fields.Char()
@@ -61,15 +68,14 @@ class Property(models.Model):
 
     selling_price = fields.Float(
         readonly=True,
-        copy=False
-
+        copy=False ,
+        default = 0
     )
 
-    bedRooms = fields.Integer(
+    bed_rooms = fields.Integer(
         default=2
     )
 
-    bedRooms = fields.Integer()
 
     living_area = fields.Integer()
 
@@ -105,10 +111,6 @@ class Property(models.Model):
         comodel_name='res.users',
         default=lambda self: self.env.user,
     )
-
-
-
-
 
     offer_ids = fields.One2many(
         string='Offers',
@@ -200,4 +202,27 @@ class Property(models.Model):
                     "message": 'The date should not be prior to the current Dat'
                 }
             }
+    #Selling price constraint
+    @api.constrains('selling_price')
+    def _selling_price_validation(self):
+        #Check whether there is no offer yet validated
+        isOrderAccepted = [offer for offer in self.offer_ids if offer.status == 'accepted']
+
+        if self.selling_price < ((90 * self.expected_price) / 100) and len(isOrderAccepted)  != 0 :
+            raise ValidationError (
+                "The selling price cannot be lower than 90% of the expected price"
+            )
+
+
+
+
+
+
+
+
+
+
+
+
+    
 

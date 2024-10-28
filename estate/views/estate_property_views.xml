@@ -50,18 +50,6 @@
             </tree>
         </field>
     </record>
-    
-    <!-- Property Offer tree view  -->
-    <record id="estate_property_offer_view_tree" model="ir.ui.view">
-        <field name="name">estate.property.offer.view.tree</field>
-        <field name="model">estate.property.offer</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="validity"/>
-                <field name="date_deadline"/>
-            </tree>
-        </field>
-    </record>
 
      <!-- Property Offer tree view  -->
      <record id="estate_property_offer_view_tree" model="ir.ui.view">
@@ -110,7 +98,7 @@
                         <page string="Description">
                             <group>
                                 <field name="description"/>
-                                <field name="bedRooms"/>
+                                <field name="bed_rooms"/>
                                 <field name="living_area"/>
                                 <field name="garden_area"/>
                                 <field name="garage"/>
@@ -125,7 +113,7 @@
                                         <field name="price"/>
                                         <field name="partner_id"/>
                                         <button name="accept_offer" type="object" string="Confirm" icon="fa-check"/>
-                                        <button name="refuse_offer" type="object" string="Cancel" icon="fa-times"/>
+                                        <button name="refuse_offer" type="object" string="Refuse" icon="fa-times"/>
                                         <field name="status"/>
                                     </tree>
                                 </field>
@@ -153,7 +141,22 @@
                     <h1>
                         <field name="name"/>
                     </h1>
+                    <notebook>
+                        <page string="Properties">
+                            <group>
+                                <field name="property_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="expected_price"/>
+                                        <field name="state"/>
+                                    </tree>
+
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
+
             </form>
         </field>
     </record>
