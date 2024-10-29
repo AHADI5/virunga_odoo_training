@@ -5,6 +5,12 @@ class EstatePropertyType(models.Model):
     _name = 'estate.property.types'
     _description = 'Property Type'
 
+    #Ordering
+    #_order = 'name'
+
+    _order = 'sequence desc'
+
+
     # Sql constraints
 
     _sql_constraints = [
@@ -15,3 +21,4 @@ class EstatePropertyType(models.Model):
     )
 
     property_ids = fields.One2many("estate.property", "property_type_id")
+    sequence = fields.Integer()

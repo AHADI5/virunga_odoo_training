@@ -5,6 +5,9 @@ class EstatePropertyTag(models.Model):
     _name = 'estate.property.tag'
     _description = 'Estate Property Tag'
 
+    #Ordering
+    _order = 'name'
+
     # Sql constraints
 
     _sql_constraints = [

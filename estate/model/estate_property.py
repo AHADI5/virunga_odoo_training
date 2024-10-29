@@ -8,6 +8,9 @@ class Property(models.Model):
     _name = "estate.property"
     _description = "Property"
 
+    #Ordering
+    _order = "id desc"
+
     #Sql constraints
 
     _sql_constraints = [

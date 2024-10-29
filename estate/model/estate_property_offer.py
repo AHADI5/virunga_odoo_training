@@ -10,6 +10,9 @@ class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
     _description = 'Estate Property Offer'
 
+    #Ordering
+    _order = 'price desc'
+
     # Sql constraints
 
     _sql_constraints = [
