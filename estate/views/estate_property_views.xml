@@ -25,6 +25,23 @@
         <field name="view_mode">tree</field>
     </record>
 
+    <!-- Tree view for  properties -->
+    <record id="estate_property_tree_view" model="ir.ui.view">
+        <field name="name">estate.property.view.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="state"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="expected_price"/>
+                 <field name="property_type_id"/>
+                <field name="partner_id"/>
+                <field name="total_area"/>
+            </tree>
+        </field>
+    </record>
+
     <!-- Tree view for the property offer   -->
     <record id="estate_property_offer_tree_view" model="ir.ui.view">
         <field name="name">estate.property.offer.view.tree</field>
@@ -73,18 +90,19 @@
                     <header>
                         <button  type="object" string="Sold" name = "sell_property"/>
                         <button  type="object" string="Cancel" name ="cancel_sold_property"/>
+                        <field name="state" widget="statusbar" statusbar_visible = "new,offer_received,offer_accepted,sold, canceled"/>
                     </header>
                     <h1>
                         <field name="name"/>
                     </h1>
                     <group>
                         <field name="state"/>
-                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                         <field name = "total_area"/>
                     </group>
                     <group>
                         <group>
-                            <field name="property_type_id"/>
+                            <field name="property_type_id" options="{'no_create' : true}"/>
                             <field name="postcode"/>
                             <field name="date_availability"/>
                         </group>
@@ -103,7 +121,7 @@
                                 <field name="garden_area"/>
                                 <field name="garage"/>
                                 <field name="gardern"/>
-                                <field name="gardern_orientation"/>
+                                <field name="gardern_orientation" widget="radio" options = "{'horizontal' : false}"/>
                             </group>
                         </page>
                         <page string="Offers">
