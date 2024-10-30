@@ -30,7 +30,11 @@
         <field name="name">estate.property.view.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success = "state == 'offer_received' or state == 'offer_accepted'"
+                  decoration-bf = "state == 'offer_accepted'"
+                  decoration-muted = "state == 'sold'"
+                  decoration-danger = "state == 'canceled'"
+            >
                 <field name="name"/>
                 <field name="state"/>
                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
@@ -47,7 +51,7 @@
         <field name="name">estate.property.offer.view.tree</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree editable="bottom">
                 <field name="property_id"/>
                 <field name="partner_id"/>
                 <field name="price"/>
@@ -62,7 +66,7 @@
         <field name="name">estate.property.types.view.tree</field>
         <field name="model">estate.property.types</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree editable="bottom" >
                 <field name="name"/>
                 <field name="sequence" widget="handle"/>
             </tree>
@@ -89,8 +93,8 @@
             <form>
                 <sheet>
                     <header>
-                        <button  type="object" string="Sold" name = "sell_property"/>
-                        <button  type="object" string="Cancel" name ="cancel_sold_property"/>
+                        <button  type="object" string="Sold" name = "sell_property" invisible = "state in ('sold' , 'canceled')" class="btn-primary"/>
+                        <button  type="object" string="Cancel" name ="cancel_sold_property" invisible = "state in ('sold' , 'canceled')"/>
                         <field name="state" widget="statusbar" statusbar_visible = "new,offer_received,offer_accepted,sold, canceled"/>
                     </header>
                     <h1>
@@ -119,20 +123,23 @@
                                 <field name="description"/>
                                 <field name="bed_rooms"/>
                                 <field name="living_area"/>
-                                <field name="garden_area"/>
+                                <field name="garden_area" invisible  = "gardern == False"/>
                                 <field name="garage"/>
                                 <field name="gardern"/>
-                                <field name="gardern_orientation" widget="radio" options = "{'horizontal' : false}"/>
+                                <field name="gardern_orientation" widget="radio" options = "{'horizontal' : false}" invisible  = "gardern == False"/>
                             </group>
                         </page>
                         <page string="Offers">
                             <group>
-                                <field name="offer_ids">
-                                    <tree>
+                                <field name="offer_ids" readonly = "state in  ('offer_received','sold' , 'canceled')">
+                                    <tree
+                                            decoration-danger="status == 'refused'"
+                                            decoration-success="status == 'accepted' "
+                                    >
                                         <field name="price"/>
                                         <field name="partner_id"/>
-                                        <button name="accept_offer" type="object" string="Confirm" icon="fa-check"/>
-                                        <button name="refuse_offer" type="object" string="Refuse" icon="fa-times"/>
+                                        <button name="accept_offer" type="object" string="Confirm" icon="fa-check" invisible="status in ('accepted' , 'refused')"/>
+                                        <button name="refuse_offer" type="object" string="Refuse" icon="fa-times" invisible="status in ('accepted' , 'refused')"/>
                                         <field name="status"/>
                                     </tree>
                                 </field>
